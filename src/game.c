@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #include "raylib.h"
 #include "globals.h"
 
@@ -9,6 +7,7 @@
 RenderTexture2D target;
 Texture2D player;
 Image map;
+
 Grid grid;
 
 float displayScale;
@@ -16,10 +15,12 @@ float displayScale;
 void load()
 {
     target = LoadRenderTexture(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
-
     player = LoadTexture("resources/texture/player.png");
     map = LoadImage("resources/map/map2.png");
+}
 
+void start()
+{
     SetTextureFilter(target.texture, FILTER_POINT);
 
     grid = grid_load(map);
@@ -34,7 +35,7 @@ void draw()
 {
     ClearBackground(GRAY);
 
-    grid_draw(&grid);
+    grid_draw(grid);
 
     DrawTextureV(player, (Vector2) {50, 27}, WHITE);
 }
@@ -75,6 +76,7 @@ int main()
     InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
 
     load();
+    start();
 
     while (!WindowShouldClose())
     {
