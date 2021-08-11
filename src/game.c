@@ -37,7 +37,7 @@ void draw()
 
     grid_draw(grid);
 
-    DrawTextureV(player, (Vector2) {50, 27}, WHITE);
+    DrawTextureV(player, (Vector2) {50, 32}, WHITE);
 }
 
 void draw_renderer()
