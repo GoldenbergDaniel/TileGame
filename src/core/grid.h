@@ -1,7 +1,7 @@
 #pragma once
 
-#define NUM_ROWS 18
-#define NUM_COLS 32
+#define GRID_ROWS 18
+#define GRID_COLS 32
 #define TILE_SIZE 5
 
 enum 
@@ -14,8 +14,8 @@ enum
 
 struct Grid
 {
-    TileType tiles[NUM_ROWS][NUM_COLS];
+    TileType tiles[GRID_ROWS][GRID_COLS];
 } typedef Grid;
 
 Grid grid_load(Image map);
-void grid_draw(Grid* grid);
+void grid_draw(Grid grid);
