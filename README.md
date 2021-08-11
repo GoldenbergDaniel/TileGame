@@ -1,3 +1,3 @@
 # SpeedrunGame
 
-A game made in C with raylib
+A platformer game written in C with raylib
