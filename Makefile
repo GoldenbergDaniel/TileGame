@@ -1,7 +1,7 @@
 run:
-	./cmake-build-debug/Speedrun
+	./build/Speedrun
 compile:
-	cmake --build cmake-build-debug/
+	cmake --build ./build
 test:
-	cmake --build cmake-build-debug/
-	./cmake-build-debug/Speedrun
+	cmake --build ./build
+	./build/Speedrun
