@@ -4,6 +4,7 @@
 #include "core/grid.h"
 #include "util/umath.h"
 
+// TODO: Move to Game struct
 RenderTexture2D target;
 Texture2D player;
 Image map;
