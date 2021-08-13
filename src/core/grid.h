@@ -11,7 +11,7 @@ typedef enum
     TILETYPE_DIRT,
 } TileType;
 
-typedef struct Grid
+typedef struct
 {
     TileType tiles[GRID_ROWS][GRID_COLS];
 } Grid;

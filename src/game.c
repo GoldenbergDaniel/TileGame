@@ -11,7 +11,7 @@ Image map;
 
 Grid grid;
 
-float displayScale;
+f32 displayScale;
 
 void load()
 {
@@ -38,7 +38,7 @@ void draw()
 
     grid_draw(grid);
 
-    DrawTextureV(player, (Vector2) {50, 32}, WHITE);
+    DrawTextureV(player, (v2) {50, 32}, WHITE);
 }
 
 void draw_renderer()

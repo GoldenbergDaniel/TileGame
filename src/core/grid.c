@@ -8,8 +8,8 @@ Grid grid_load(Image map)
     Grid grid;
     Color color;
 
-    unsigned int r;
-    for (int c = 0; c < GRID_COLS*GRID_ROWS; c++)
+    u16 r;
+    for (u16 c = 0; c < GRID_COLS*GRID_ROWS; c++)
     {
         if (c+1 % GRID_COLS == 0) r++;
 
@@ -28,9 +28,9 @@ Grid grid_load(Image map)
 
 void grid_draw(Grid grid)
 {
-    for (int r = 0; r < VIEWPORT_HEIGHT/TILE_SIZE; r++)
+    for (u16 r = 0; r < VIEWPORT_HEIGHT/TILE_SIZE; r++)
     {
-        for (int c = 0; c < VIEWPORT_WIDTH/TILE_SIZE; c++)
+        for (u16 c = 0; c < VIEWPORT_WIDTH/TILE_SIZE; c++)
         {
             Color color;
 
