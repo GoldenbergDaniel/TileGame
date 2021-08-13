@@ -1,6 +1,6 @@
 #include "umath.h"
 
-float min(float x, float y) 
+f32 min(f32 x, f32 y) 
 {
     if (x < y) return x;
     return y;

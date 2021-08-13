@@ -1,4 +1,6 @@
 #pragma once
 
+#include "../globals.h"
+
 // Returns min between x and y
-float min(float x, float y);
+f32 min(f32 x, f32 y);
