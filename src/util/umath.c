@@ -1,3 +1,5 @@
+#include "../globals.h"
+
 #include "umath.h"
 
 f32 min(f32 x, f32 y) 

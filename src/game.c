@@ -1,22 +1,24 @@
-#include "raylib.h"
 #include "globals.h"
 
 #include "core/grid.h"
+#include "core/player.h"
+
 #include "util/umath.h"
 
 // TODO: Move to Game struct
 RenderTexture2D target;
-Texture2D player;
+Texture2D player_texture;
 Image map;
 
 Grid grid;
+Player player;
 
-f32 displayScale;
+f32 display_scale;
 
 void load()
 {
     target = LoadRenderTexture(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
-    player = LoadTexture("resources/texture/player.png");
+    player_texture = LoadTexture("resources/texture/player.png");
     map = LoadImage("resources/map/map2.png");
 }
 
@@ -25,11 +27,14 @@ void start()
     SetTextureFilter(target.texture, FILTER_POINT);
 
     grid = grid_load(map);
+    player = player_new(6, player_texture);
 }
 
 void update()
 {
-    displayScale = min((float) GetScreenWidth() / VIEWPORT_WIDTH, (float) GetScreenHeight() / VIEWPORT_HEIGHT);
+    display_scale = min((f32) GetScreenWidth() / VIEWPORT_WIDTH, (f32) GetScreenHeight() / VIEWPORT_HEIGHT);
+
+    player_update(&player);
 }
 
 void draw()
@@ -37,8 +42,7 @@ void draw()
     ClearBackground(GRAY);
 
     grid_draw(grid);
-
-    DrawTextureV(player, (v2) {50, 32}, WHITE);
+    player_draw(&player);
 }
 
 void draw_renderer()
@@ -48,23 +52,23 @@ void draw_renderer()
     Rectangle source = (Rectangle) {
         0, 
         0, 
-        (float) target.texture.width, 
-        (float) -target.texture.height 
+        target.texture.width, 
+        -target.texture.height 
     };
 
     Rectangle destination = (Rectangle) {
-        (GetScreenWidth() - ((float) VIEWPORT_WIDTH * displayScale)) * 0.5f,
-        (GetScreenHeight() - ((float) VIEWPORT_HEIGHT * displayScale)) * 0.5f,
-        (float) VIEWPORT_WIDTH * displayScale, 
-        (float) VIEWPORT_HEIGHT * displayScale
+        (GetScreenWidth() - ((f32) VIEWPORT_WIDTH * display_scale)) * 0.5f,
+        (GetScreenHeight() - ((f32) VIEWPORT_HEIGHT * display_scale)) * 0.5f,
+        VIEWPORT_WIDTH * display_scale, 
+        VIEWPORT_HEIGHT * display_scale
     };
 
-    DrawTexturePro(target.texture, source, destination, (Vector2) {0, 0}, 0, WHITE);
+    DrawTexturePro(target.texture, source, destination, (v2) {0, 0}, 0, WHITE);
 }
 
 void unload()
 {
-    UnloadTexture(player);
+    UnloadTexture(player_texture);
     UnloadImage(map);
     UnloadRenderTexture(target);
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "raylib.h"
+
 #define WINDOW_TITLE "Speedrun"
 #define TARGET_FPS 60
 

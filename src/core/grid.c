@@ -1,4 +1,3 @@
-#include "raylib.h"
 #include "../globals.h"
 
 #include "grid.h"

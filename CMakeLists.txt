@@ -13,7 +13,8 @@ set(UTIL_SOURCES
 
 # Core source files
 set(CORE_SOURCES 
-    src/core/grid.c)
+    src/core/grid.c
+    src/core/player.c)
 
 find_package(raylib 3.0 QUIET)
 

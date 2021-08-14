@@ -4,14 +4,14 @@
 #define GRID_COLS 32
 #define TILE_SIZE 5
 
-typedef enum 
+typedef enum TileType
 {
     TILETYPE_AIR,
     TILETYPE_GRASS,
     TILETYPE_DIRT,
 } TileType;
 
-typedef struct
+typedef struct Grid
 {
     TileType tiles[GRID_ROWS][GRID_COLS];
 } Grid;
