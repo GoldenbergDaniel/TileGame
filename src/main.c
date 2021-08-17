@@ -19,7 +19,7 @@ void load()
 {
     target = LoadRenderTexture(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
     player_texture = LoadTexture("resources/texture/player.png");
-    map = LoadImage("resources/map/map2.png");
+    map = LoadImage("resources/map/map3.png");
 }
 
 void start()
@@ -27,7 +27,7 @@ void start()
     SetTextureFilter(target.texture, FILTER_POINT);
 
     grid = grid_load(map);
-    player = player_new(6, player_texture);
+    player = player_new(60, player_texture);
 }
 
 void update()
