@@ -5,7 +5,7 @@ set(CMAKE_C_STANDARD 11)
 
 # Main source files
 set(MAIN_SOURCES 
-    src/game.c)
+    src/main.c)
 
 # Util source files
 set(UTIL_SOURCES 
