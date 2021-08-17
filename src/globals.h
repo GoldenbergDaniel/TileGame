@@ -20,6 +20,8 @@
 #define COLOR_GRASS (Color) {119, 141, 48, 255}
 #define COLOR_DIRT (Color) {67, 57, 42, 255}
 
+#define NULL 0
+
 typedef short unsigned int u16;
 typedef unsigned int u32;
 typedef long unsigned int u64;
@@ -30,3 +32,5 @@ typedef float f32;
 typedef long f64;
 typedef Vector2 v2;
 typedef Vector3 v3;
+typedef Vector4 v4;
+typedef Matrix m4;

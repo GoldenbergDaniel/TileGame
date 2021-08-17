@@ -1,16 +1,14 @@
-#include <stdio.h>
-
 #include "../globals.h"
 
 #include "player.h"
 
-Player player_new(f32 speed, Texture2D texture)
+Player player_new()
 {
     Player player = {
         (v2) {40, 40},
         (v2) {0, 0},
-        speed,
-        texture
+        60.0f,
+        NULL
     };
 
     return player;
@@ -32,21 +30,9 @@ void player_update(Player* this)
     this->pos.x += this->vel.x * GetFrameTime();
 }
 
-void player_draw(Player* this)
+void player_draw(Player* this, Texture2D texture)
 {
-    Rectangle source = (Rectangle) {
-        0, 
-        0,
-        -this->texture.width, 
-        -this->texture.height 
-    };
+    this->sprite = sprite_new(texture, WHITE, this->pos, 0);   
 
-    Rectangle destination = (Rectangle) {
-        this->pos.x * VIEWPORT_SCALE,
-        this->pos.y * VIEWPORT_SCALE,
-        this->texture.width * VIEWPORT_SCALE, 
-        this->texture.height * VIEWPORT_SCALE
-    };
-
-    DrawTexturePro(this->texture, source, destination, (v2) {0, 0}, 180, WHITE);
+    DrawTexturePro(this->sprite.texture, this->sprite.src, this->sprite.dest, (v2) {0, 0}, this->sprite.rot, this->sprite.color);
 }

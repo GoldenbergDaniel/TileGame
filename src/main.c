@@ -5,7 +5,6 @@
 
 #include "util/umath.h"
 
-// TODO: Move to Game struct
 RenderTexture2D target;
 Texture2D player_texture;
 Image map;
@@ -27,7 +26,7 @@ void start()
     SetTextureFilter(target.texture, FILTER_POINT);
 
     grid = grid_load(map);
-    player = player_new(60, player_texture);
+    player = player_new();
 }
 
 void update()
@@ -42,21 +41,21 @@ void draw()
     ClearBackground(GRAY);
 
     grid_draw(grid);
-    player_draw(&player);
+    player_draw(&player, player_texture);
 }
 
 void draw_renderer()
 {
     ClearBackground(BLACK);
 
-    Rectangle source = (Rectangle) {
+    Rectangle source = {
         0, 
         0, 
         target.texture.width, 
         -target.texture.height 
     };
 
-    Rectangle destination = (Rectangle) {
+    Rectangle destination = {
         (GetScreenWidth() - ((f32) WINDOW_WIDTH * window_scale)) * 0.5f,
         (GetScreenHeight() - ((f32) WINDOW_HEIGHT * window_scale)) * 0.5f,
         WINDOW_WIDTH * window_scale, 
