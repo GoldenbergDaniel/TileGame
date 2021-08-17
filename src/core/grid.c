@@ -19,7 +19,7 @@ Grid grid_load(Image map)
         if (color.g != 0)
             grid.tiles[r][c] = TILETYPE_GRASS;
         if (color.b != 0)
-            grid.tiles[r][c] = TILETYPE_DIRT;    
+            grid.tiles[r][c] = TILETYPE_DIRT;
     }
 
     return grid;

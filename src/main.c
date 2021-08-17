@@ -13,7 +13,7 @@ Image map;
 Grid grid;
 Player player;
 
-f32 display_scale;
+f32 window_scale;
 
 void load()
 {
@@ -32,7 +32,7 @@ void start()
 
 void update()
 {
-    display_scale = min((f32) GetScreenWidth() / WINDOW_WIDTH, (f32) GetScreenHeight() / WINDOW_HEIGHT);
+    window_scale = min((f32) GetScreenWidth() / WINDOW_WIDTH, (f32) GetScreenHeight() / WINDOW_HEIGHT);
 
     player_update(&player);
 }
@@ -57,10 +57,10 @@ void draw_renderer()
     };
 
     Rectangle destination = (Rectangle) {
-        (GetScreenWidth() - ((f32) WINDOW_WIDTH * display_scale)) * 0.5f,
-        (GetScreenHeight() - ((f32) WINDOW_HEIGHT * display_scale)) * 0.5f,
-        WINDOW_WIDTH * display_scale, 
-        WINDOW_HEIGHT * display_scale
+        (GetScreenWidth() - ((f32) WINDOW_WIDTH * window_scale)) * 0.5f,
+        (GetScreenHeight() - ((f32) WINDOW_HEIGHT * window_scale)) * 0.5f,
+        WINDOW_WIDTH * window_scale, 
+        WINDOW_HEIGHT * window_scale
     };
 
     DrawTexturePro(target.texture, source, destination, (v2) {0, 0}, 0, WHITE);
