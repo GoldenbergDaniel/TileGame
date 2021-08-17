@@ -17,7 +17,7 @@ f32 display_scale;
 
 void load()
 {
-    target = LoadRenderTexture(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+    target = LoadRenderTexture(WINDOW_WIDTH, WINDOW_HEIGHT);
     player_texture = LoadTexture("resources/texture/player.png");
     map = LoadImage("resources/map/map3.png");
 }
@@ -32,7 +32,7 @@ void start()
 
 void update()
 {
-    display_scale = min((f32) GetScreenWidth() / VIEWPORT_WIDTH, (f32) GetScreenHeight() / VIEWPORT_HEIGHT);
+    display_scale = min((f32) GetScreenWidth() / WINDOW_WIDTH, (f32) GetScreenHeight() / WINDOW_HEIGHT);
 
     player_update(&player);
 }
@@ -57,10 +57,10 @@ void draw_renderer()
     };
 
     Rectangle destination = (Rectangle) {
-        (GetScreenWidth() - ((f32) VIEWPORT_WIDTH * display_scale)) * 0.5f,
-        (GetScreenHeight() - ((f32) VIEWPORT_HEIGHT * display_scale)) * 0.5f,
-        VIEWPORT_WIDTH * display_scale, 
-        VIEWPORT_HEIGHT * display_scale
+        (GetScreenWidth() - ((f32) WINDOW_WIDTH * display_scale)) * 0.5f,
+        (GetScreenHeight() - ((f32) WINDOW_HEIGHT * display_scale)) * 0.5f,
+        WINDOW_WIDTH * display_scale, 
+        WINDOW_HEIGHT * display_scale
     };
 
     DrawTexturePro(target.texture, source, destination, (v2) {0, 0}, 0, WHITE);

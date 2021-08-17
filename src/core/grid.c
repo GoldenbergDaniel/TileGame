@@ -27,9 +27,9 @@ Grid grid_load(Image map)
 
 void grid_draw(Grid grid)
 {
-    for (u16 r = 0; r < VIEWPORT_HEIGHT/TILE_SIZE; r++)
+    for (u16 r = 0; r < WINDOW_HEIGHT/TILE_SIZE; r++)
     {
-        for (u16 c = 0; c < VIEWPORT_WIDTH/TILE_SIZE; c++)
+        for (u16 c = 0; c < WINDOW_WIDTH/TILE_SIZE; c++)
         {
             Color color;
 

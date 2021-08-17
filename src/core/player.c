@@ -21,19 +21,13 @@ void player_update(Player* this)
     this->vel.x = 0;
 
     if (IsKeyDown(KEY_A))
-    {
         this->vel.x = -this->speed;
-    }
 
     if (IsKeyDown(KEY_D))
-    {
         this->vel.x = this->speed;
-    }
 
     if (IsKeyDown(KEY_A) && IsKeyDown(KEY_D))
-    {
         this->vel.x = 0;
-    }
 
     this->pos.x += this->vel.x * GetFrameTime();
 }
@@ -43,15 +37,15 @@ void player_draw(Player* this)
     Rectangle source = (Rectangle) {
         0, 
         0,
-        this->texture.width, 
-        this->texture.height 
+        -this->texture.width, 
+        -this->texture.height 
     };
 
     Rectangle destination = (Rectangle) {
-        this->pos.x * 8,
-        this->pos.y * 8,
-        -this->texture.width * 8, 
-        -this->texture.height * 8
+        this->pos.x * VIEWPORT_SCALE,
+        this->pos.y * VIEWPORT_SCALE,
+        this->texture.width * VIEWPORT_SCALE, 
+        this->texture.height * VIEWPORT_SCALE
     };
 
     DrawTexturePro(this->texture, source, destination, (v2) {0, 0}, 180, WHITE);

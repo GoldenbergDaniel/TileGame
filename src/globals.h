@@ -8,8 +8,7 @@
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
 
-#define VIEWPORT_WIDTH 1280
-#define VIEWPORT_HEIGHT 720
+#define VIEWPORT_SCALE 8
 
 #define COLOR_BLACK (Color) {19, 19, 19, 255}
 #define COLOR_WHITE (Color) {236, 236, 236, 255}
