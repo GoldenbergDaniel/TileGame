@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../core/sprite.h"
+#include "../component/sprite.h"
 
 typedef struct Player
 {
