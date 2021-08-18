@@ -1,7 +1,7 @@
 #include "globals.h"
 
 #include "core/grid.h"
-#include "core/player.h"
+#include "entity/player.h"
 
 #include "util/umath.h"
 

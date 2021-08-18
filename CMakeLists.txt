@@ -14,12 +14,15 @@ set(UTIL_SOURCES
 # Core source files
 set(CORE_SOURCES 
     src/core/grid.c
-    src/core/player.c
     src/core/sprite.c)
+
+# Entity source files
+set(ENTITY_SOURCES 
+    src/entity/player.c)
 
 find_package(raylib 3.0 QUIET)
 
-add_executable(${PROJECT_NAME} ${MAIN_SOURCES} ${UTIL_SOURCES} ${CORE_SOURCES})
+add_executable(${PROJECT_NAME} ${MAIN_SOURCES} ${UTIL_SOURCES} ${CORE_SOURCES} ${ENTITY_SOURCES})
 
 if (APPLE)
     target_link_libraries(${PROJECT_NAME} "-framework IOKit")

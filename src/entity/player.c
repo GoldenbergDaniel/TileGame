@@ -5,7 +5,7 @@
 Player player_new()
 {
     Player player = {
-        (v2) {40, 40},
+        (v2) {40, 47},
         (v2) {0, 0},
         60.0f,
         NULL
