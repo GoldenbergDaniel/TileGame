@@ -17,8 +17,8 @@ set(COMPONENT_SOURCES
     src/component/sprite.c)
 
 # Core source files
-set(CORE_SOURCES 
-    src/core/grid.c)
+set(WORLD_SOURCES 
+    src/world/grid.c)
 
 # Entity source files
 set(ENTITY_SOURCES 
@@ -26,7 +26,7 @@ set(ENTITY_SOURCES
 
 find_package(raylib 3.0 QUIET)
 
-add_executable(${PROJECT_NAME} ${MAIN_SOURCES} ${UTIL_SOURCES} ${COMPONENT_SOURCES} ${CORE_SOURCES} ${ENTITY_SOURCES})
+add_executable(${PROJECT_NAME} ${MAIN_SOURCES} ${UTIL_SOURCES} ${COMPONENT_SOURCES} ${WORLD_SOURCES} ${ENTITY_SOURCES})
 
 if (APPLE)
     target_link_libraries(${PROJECT_NAME} "-framework IOKit")
