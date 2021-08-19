@@ -13,8 +13,8 @@ set(UTIL_SOURCES
 
 # Component source files
 set(COMPONENT_SOURCES 
-    src/component/sprite.c
-    src/component/transform.c)
+    src/component/translate.c
+    src/component/sprite.c)
 
 # Core source files
 set(CORE_SOURCES 

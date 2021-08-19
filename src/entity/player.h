@@ -1,11 +1,11 @@
 #pragma once
 
 #include "../component/sprite.h"
-#include "../component/transform.h"
+#include "../component/translate.h"
 
 typedef struct Player
 {
-    Transform1 transform;
+    Translate translate;
     Sprite sprite;
     v2 velocity;
     f32 speed;
