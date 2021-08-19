@@ -1,8 +1,8 @@
 #pragma once
 
-#define GRID_ROWS 144
-#define GRID_COLS 256
-#define TILE_SIZE 5
+#define GRID_ROWS 18
+#define GRID_COLS 32
+#define TILE_SIZE 40
 
 typedef enum TileType
 {
