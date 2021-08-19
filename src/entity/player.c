@@ -6,7 +6,7 @@
 Player player_new(Texture2D texture)
 {
     Sprite sprite = sprite_new(texture, WHITE, (v2) {0, 0}, 0);
-    Translate translate = translate_new((v2) {40, 37}, 0, 1);
+    Translate translate = translate_new((v2) {40, 47}, 0, 1);
 
     Player player = {
         translate,
