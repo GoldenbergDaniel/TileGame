@@ -26,7 +26,7 @@ void start()
     SetTextureFilter(target.texture, FILTER_POINT);
 
     grid = grid_load(map);
-    player = player_new();
+    player = player_new(player_texture);
 }
 
 void update()
@@ -41,7 +41,7 @@ void draw()
     ClearBackground(GRAY);
 
     grid_draw(grid);
-    player_draw(&player, player_texture);
+    player_draw(&player);
 }
 
 void draw_renderer()

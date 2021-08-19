@@ -1,14 +1,17 @@
+#include <stdio.h>
 #include "../globals.h"
 
 #include "player.h"
 
-Player player_new()
+Player player_new(Texture2D texture)
 {
+    Sprite sprite = sprite_new(texture, WHITE, (v2) {0, 0}, 0);
+
     Player player = {
-        (v2) {40, 47},
+        transform_new((v2) {40, 37}, 0, 1),
+        sprite,
         (v2) {0, 0},
         60.0f,
-        NULL
     };
 
     return player;
@@ -16,23 +19,23 @@ Player player_new()
 
 void player_update(Player* this)
 {
-    this->vel.x = 0;
+    this->velocity.x = 0;
 
     if (IsKeyDown(KEY_A))
-        this->vel.x = -this->speed;
+        this->velocity.x = -this->speed;
 
     if (IsKeyDown(KEY_D))
-        this->vel.x = this->speed;
+        this->velocity.x = this->speed;
 
     if (IsKeyDown(KEY_A) && IsKeyDown(KEY_D))
-        this->vel.x = 0;
+        this->velocity.x = 0;
 
-    this->pos.x += this->vel.x * GetFrameTime();
+    this->transform.position.x += this->velocity.x * GetFrameTime();
 }
 
-void player_draw(Player* this, Texture2D texture)
+void player_draw(Player* this)
 {
-    this->sprite = sprite_new(texture, WHITE, this->pos, 0);   
+    this->sprite = sprite_new(this->sprite.texture, WHITE, this->transform.position, this->transform.rotation);
 
-    DrawTexturePro(this->sprite.texture, this->sprite.src, this->sprite.dest, (v2) {0, 0}, this->sprite.rot, this->sprite.color);
+    DrawTexturePro(this->sprite.texture, this->sprite.src, this->sprite.dest, (v2) {0, 0}, this->sprite.rotation, this->sprite.color);
 }

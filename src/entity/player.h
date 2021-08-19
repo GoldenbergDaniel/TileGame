@@ -1,15 +1,16 @@
 #pragma once
 
 #include "../component/sprite.h"
+#include "../component/transform.h"
 
 typedef struct Player
 {
-    v2 pos;
-    v2 vel;
-    f32 speed;
+    Transform1 transform;
     Sprite sprite;
+    v2 velocity;
+    f32 speed;
 } Player;
 
 Player player_new();
 void player_update(Player* this);
-void player_draw(Player* this, Texture2D texture);
+void player_draw(Player* this);
