@@ -20,7 +20,7 @@
 #define COLOR_GRASS (Color) {119, 141, 48, 255}
 #define COLOR_DIRT (Color) {67, 57, 42, 255}
 
-#define NULL 0
+#define NIL 0
 
 typedef short unsigned int u16;
 typedef unsigned int u32;
