@@ -58,7 +58,7 @@ void draw_renderer()
     Rectangle destination = {
         (GetScreenWidth() - ((f32) WINDOW_WIDTH * window_scale)) * 0.5f,
         (GetScreenHeight() - ((f32) WINDOW_HEIGHT * window_scale)) * 0.5f,
-        WINDOW_WIDTH * window_scale, 
+        WINDOW_WIDTH * window_scale,
         WINDOW_HEIGHT * window_scale
     };
 

@@ -9,6 +9,7 @@ typedef struct Player
     Sprite sprite;
     v2 velocity;
     f32 speed;
+    i8 flip_y;
 } Player;
 
 Player player_new();

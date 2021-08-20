@@ -5,7 +5,7 @@
 
 Player player_new(Texture2D texture)
 {
-    Sprite sprite = sprite_new(texture, WHITE, (v2) {0, 0}, 0);
+    Sprite sprite = sprite_new(texture, WHITE, (v2) {0, 0}, 0, 1);
     Translate translate = translate_new((v2) {40, 47}, 0, 1);
 
     Player player = {
@@ -13,6 +13,7 @@ Player player_new(Texture2D texture)
         sprite,
         (v2) {0, 0},
         60.0f,
+        1
     };
 
     return player;
@@ -36,7 +37,12 @@ void player_update(Player* this)
 
 void player_draw(Player* this)
 {
-    this->sprite = sprite_new(this->sprite.texture, WHITE, this->translate.position, this->translate.rotation);
+    if (IsKeyDown(KEY_D))
+        this->flip_y = 1;
+    else if (IsKeyDown(KEY_A))
+        this->flip_y = -1;
+
+    this->sprite = sprite_new(this->sprite.texture, WHITE, this->translate.position, this->translate.rotation, this->flip_y);
 
     DrawTexturePro(this->sprite.texture, this->sprite.src, this->sprite.dest, (v2) {0, 0}, this->sprite.rotation, this->sprite.color);
 }

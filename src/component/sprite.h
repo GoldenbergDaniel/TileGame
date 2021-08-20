@@ -10,4 +10,4 @@ typedef struct Sprite
     f32 rotation;
 } Sprite;
 
-Sprite sprite_new(Texture2D texture, Color color, v2 pos, f32 rot);
+Sprite sprite_new(Texture2D texture, Color color, v2 pos, f32 rot, i8 flip_y);
