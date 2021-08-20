@@ -1,6 +1,6 @@
 #include "globals.h"
 
-#include "core/grid.h"
+#include "world/grid.h"
 #include "entity/player.h"
 
 #include "util/umath.h"
