@@ -14,7 +14,8 @@ set(UTIL_SOURCES
 # Component source files
 set(COMPONENT_SOURCES 
     src/component/translate.c
-    src/component/sprite.c)
+    src/component/sprite.c
+    src/component/collider.c)
 
 # Core source files
 set(WORLD_SOURCES 
