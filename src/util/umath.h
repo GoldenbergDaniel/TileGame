@@ -1,16 +1,19 @@
 #pragma once
 
-// Returns min between num1 and num2
+// Returns min between two numbers
 f32 min(f32 num1, f32 num2); 
 
-// Adds vectors vec1 and vec2
+// Returns max between two numbers
+f32 max(f32 num1, f32 num2); 
+
+// Adds two vectors
 v2 add_v2(v2 vec1, v2 vec2);
 
-// Subtracts vectors vec1 and vec2
+// Subtracts two vectors
 v2 sub_v2(v2 vec1, v2 vec2);
 
-// Multiplies vectors vec1 and vec2
+// Multiplies two vectors
 v2 mult_v2(v2 vec1, v2 vec2);
 
-// Divides vectors vec1 and vec2
+// Divides two vectors
 v2 div_v2(v2 vec1, v2 vec2);
