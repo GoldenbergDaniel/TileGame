@@ -14,6 +14,3 @@ v2 sub_v2(v2 vec1, v2 vec2);
 
 // Multiplies two vectors
 v2 mult_v2(v2 vec1, v2 vec2);
-
-// Divides two vectors
-v2 div_v2(v2 vec1, v2 vec2);

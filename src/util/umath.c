@@ -31,21 +31,3 @@ v2 sub_v2(v2 vec1, v2 vec2)
 
     return vec3;
 }
-
-v2 mult_v2(v2 vec1, v2 vec2)
-{
-    v2 vec3;
-    vec3.x = vec1.x * vec2.x;
-    vec3.y = vec1.y * vec2.y;
-
-    return vec3;
-}
-
-v2 div_v2(v2 vec1, v2 vec2)
-{
-    v2 vec3;
-    vec3.x = vec1.x / vec2.x;
-    vec3.y = vec1.y / vec2.y;
-
-    return vec3;
-}
