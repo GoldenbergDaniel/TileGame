@@ -22,6 +22,7 @@ Player player_new(Texture2D texture)
 void player_update(Player* this)
 {
     this->velocity.x = 0;
+    this->velocity.y = 0;
 
     if (IsKeyDown(KEY_A))
         this->velocity.x = -this->speed;
@@ -32,7 +33,17 @@ void player_update(Player* this)
     if (IsKeyDown(KEY_A) && IsKeyDown(KEY_D))
         this->velocity.x = 0;
 
+    if (IsKeyDown(KEY_W))
+        this->velocity.y = -this->speed;
+
+    if (IsKeyDown(KEY_S))
+        this->velocity.y = this->speed;
+
+    if (IsKeyDown(KEY_W) && IsKeyDown(KEY_S))
+        this->velocity.y = 0;
+
     this->translate.position.x += this->velocity.x * GetFrameTime();
+    this->translate.position.y += this->velocity.y * GetFrameTime();
 }
 
 void player_draw(Player* this)

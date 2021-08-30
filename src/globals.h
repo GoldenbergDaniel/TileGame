@@ -19,6 +19,7 @@
 #define COLOR_AIR (Color) {124, 180, 225, 255}
 #define COLOR_GRASS (Color) {119, 141, 48, 255}
 #define COLOR_DIRT (Color) {67, 57, 42, 255}
+#define COLOR_SAND (Color) {198, 183, 133, 255}
 
 #define NIL 0
 
