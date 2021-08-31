@@ -6,9 +6,9 @@
 
 typedef enum TileType
 {
-    TILETYPE_AIR,
+    TILETYPE_WATER,
     TILETYPE_GRASS,
-    TILETYPE_DIRT,
+    TILETYPE_SAND,
 } TileType;
 
 typedef struct Grid
