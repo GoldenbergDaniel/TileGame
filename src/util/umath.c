@@ -38,12 +38,12 @@ v2 sub_v2(v2 vec1, v2 vec2)
     return vec3;
 }
 
-f32 mult_v2(v2 vec1, v2 vec2)
-{
-    f32 numerator = (vec1.x * vec2.x) + (vec1.y * vec2.y);
-    f32 denominator = distance(vec1.x, vec1.y) * distance(vec2.x, vec2.y);
+// f32 mult_v2(v2 vec1, v2 vec2)
+// {
+//     f32 numerator = (vec1.x * vec2.x) + (vec1.y * vec2.y);
+//     f32 denominator = distance(vec1.x, vec1.y) * distance(vec2.x, vec2.y);
 
-    f32 angle = acos(numerator / denominator);
+//     f32 angle = acos(numerator / denominator);
 
-    return ((vec1.x * vec2.x) + (vec1.y * vec2.y)) * cos(angle);
-}
+//     return ((vec1.x * vec2.x) + (vec1.y * vec2.y)) * cos(angle);
+// }

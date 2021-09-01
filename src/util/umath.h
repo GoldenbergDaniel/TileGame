@@ -16,4 +16,4 @@ v2 add_v2(v2 vec1, v2 vec2);
 v2 sub_v2(v2 vec1, v2 vec2);
 
 // Multiplies two vectors (dot product)
-f32 mult_v2(v2 vec1, v2 vec2);
+// f32 mult_v2(v2 vec1, v2 vec2);
