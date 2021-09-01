@@ -1,11 +1,11 @@
-#include <stdio.h>
 #include "../globals.h"
+#include "../util/umath.h"
 
 #include "player.h"
 
 Player player_new(Texture2D texture)
 {
-    Sprite sprite = sprite_new(texture, WHITE, (v2) {0, 0}, 0, 1);
+    Sprite sprite = sprite_new(texture, WHITE, (v2) {0, 0}, 0, 1, 1);
     Translate translate = translate_new((v2) {40, 47}, 0, 1);
 
     Player player = {
@@ -21,29 +21,29 @@ Player player_new(Texture2D texture)
 
 void player_update(Player* this)
 {
-    this->velocity.x = 0;
-    this->velocity.y = 0;
+    this->velocity = (v2) {0, 0};
 
     if (IsKeyDown(KEY_A))
-        this->velocity.x = -this->speed;
+        this->velocity.x = -this->speed * GetFrameTime();
 
     if (IsKeyDown(KEY_D))
-        this->velocity.x = this->speed;
+        this->velocity.x = this->speed * GetFrameTime();
 
     if (IsKeyDown(KEY_A) && IsKeyDown(KEY_D))
         this->velocity.x = 0;
 
     if (IsKeyDown(KEY_W))
-        this->velocity.y = -this->speed;
+        this->velocity.y = -this->speed * GetFrameTime();
 
     if (IsKeyDown(KEY_S))
-        this->velocity.y = this->speed;
+        this->velocity.y = this->speed * GetFrameTime();
 
     if (IsKeyDown(KEY_W) && IsKeyDown(KEY_S))
         this->velocity.y = 0;
 
-    this->translate.position.x += this->velocity.x * GetFrameTime();
-    this->translate.position.y += this->velocity.y * GetFrameTime();
+    this->translate.position = add_v2(this->translate.position, this->velocity);
+
+    this->translate.scale += 0.5f;
 }
 
 void player_draw(Player* this)
@@ -53,7 +53,7 @@ void player_draw(Player* this)
     else if (IsKeyDown(KEY_A))
         this->flip_y = -1;
 
-    this->sprite = sprite_new(this->sprite.texture, WHITE, this->translate.position, this->translate.rotation, this->flip_y);
+    this->sprite = sprite_new(this->sprite.texture, WHITE, this->translate.position, this->translate.rotation, this->translate.scale, this->flip_y);
 
     DrawTexturePro(this->sprite.texture, this->sprite.src, this->sprite.dest, (v2) {0, 0}, this->sprite.rotation, this->sprite.color);
 }

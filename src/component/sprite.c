@@ -2,7 +2,7 @@
 
 #include "sprite.h"
 
-Sprite sprite_new(Texture2D texture, Color color, v2 pos, f32 rot, i8 flip_y)
+Sprite sprite_new(Texture2D texture, Color color, v2 pos, f32 rot, f32 scale, i8 flip_y)
 {
     Rectangle src = {
         0, 
@@ -13,9 +13,9 @@ Sprite sprite_new(Texture2D texture, Color color, v2 pos, f32 rot, i8 flip_y)
 
     Rectangle dest = {
         pos.x * VIEWPORT_SCALE,
-        pos.y * VIEWPORT_SCALE,
-        texture.width * VIEWPORT_SCALE, 
-        texture.height * VIEWPORT_SCALE
+        pos.y * VIEWPORT_SCALE - scale,
+        texture.width * VIEWPORT_SCALE + scale,
+        texture.height * VIEWPORT_SCALE + scale
     };
 
     Sprite sprite = {
@@ -24,7 +24,8 @@ Sprite sprite_new(Texture2D texture, Color color, v2 pos, f32 rot, i8 flip_y)
         dest,
         color,
         pos,
-        rot
+        rot,
+        scale
     };
 
     return sprite;
