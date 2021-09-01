@@ -18,7 +18,7 @@ void load()
 {
     target = LoadRenderTexture(WINDOW_WIDTH, WINDOW_HEIGHT);
     player_texture = LoadTexture("resources/texture/player.png");
-    map = LoadImage("resources/map/map1.png");
+    map = LoadImage("resources/map/map2.png");
 }
 
 void start()

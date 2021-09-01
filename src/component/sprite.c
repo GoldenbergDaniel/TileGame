@@ -12,10 +12,10 @@ Sprite sprite_new(Texture2D texture, Color color, v2 pos, f32 rot, f32 scale, i8
     };
 
     Rectangle dest = {
-        pos.x * VIEWPORT_SCALE,
-        pos.y * VIEWPORT_SCALE - scale,
-        texture.width * VIEWPORT_SCALE + scale,
-        texture.height * VIEWPORT_SCALE + scale
+        (pos.x - scale*3) * VIEWPORT_SCALE,
+        (pos.y - texture.height * scale) * VIEWPORT_SCALE,
+        texture.width * scale * VIEWPORT_SCALE,
+        texture.height * scale * VIEWPORT_SCALE
     };
 
     Sprite sprite = {

@@ -6,7 +6,7 @@
 Player player_new(Texture2D texture)
 {
     Sprite sprite = sprite_new(texture, WHITE, (v2) {0, 0}, 0, 1, 1);
-    Translate translate = translate_new((v2) {40, 47}, 0, 1);
+    Translate translate = translate_new((v2) {39, 49}, 0, 1);
 
     Player player = {
         translate,
@@ -43,7 +43,7 @@ void player_update(Player* this)
 
     this->translate.position = add_v2(this->translate.position, this->velocity);
 
-    this->translate.scale += 0.5f;
+    this->translate.scale += 0.01f;
 }
 
 void player_draw(Player* this)
