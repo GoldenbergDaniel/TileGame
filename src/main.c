@@ -17,7 +17,7 @@ f32 window_scale;
 void load()
 {
     target = LoadRenderTexture(WINDOW_WIDTH, WINDOW_HEIGHT);
-    player_texture = LoadTexture("resources/texture/player.png");
+    player_texture = LoadTexture("resources/texture/debug.png");
     map = LoadImage("resources/map/map2.png");
 }
 
