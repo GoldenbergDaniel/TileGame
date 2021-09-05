@@ -6,7 +6,12 @@
 #include "util/umath.h"
 
 RenderTexture2D target;
+
 Texture2D player_texture;
+Texture2D grass_texture;
+Texture2D sand_texture;
+Texture2D water_texture;
+
 Image map;
 
 Grid grid;
@@ -17,7 +22,12 @@ f32 window_scale;
 void load()
 {
     target = LoadRenderTexture(WINDOW_WIDTH, WINDOW_HEIGHT);
+
     player_texture = LoadTexture("resources/texture/player.png");
+    grass_texture = LoadTexture("resources/texture/grass.png");
+    sand_texture = LoadTexture("resources/texture/sand.png");
+    water_texture = LoadTexture("resources/texture/water.png");
+    
     map = LoadImage("resources/map/map1.png");
 }
 
@@ -68,6 +78,10 @@ void draw_renderer()
 void unload()
 {
     UnloadTexture(player_texture);
+    UnloadTexture(grass_texture);
+    UnloadTexture(sand_texture);
+    UnloadTexture(water_texture);
+
     UnloadImage(map);
     UnloadRenderTexture(target);
 }
