@@ -2,7 +2,7 @@
 
 #include "umisc.h"
 
-v2 get_mouse_pos() 
+v2 get_mouse_position() 
 {
     v2 pos;
     pos.x = GetMouseX() / VIEWPORT_SCALE;

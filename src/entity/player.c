@@ -47,7 +47,7 @@ void player_update(Player* this)
 
 void player_draw(Player* this)
 {
-    v2 mouse_pos = get_mouse_pos();
+    v2 mouse_pos = get_mouse_position();
 
     if (mouse_pos.x > this->translate.position.x)
         this->flip_y = 1;

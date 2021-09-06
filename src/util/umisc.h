@@ -1,4 +1,4 @@
 #pragma once
 
-// Returns mouse position in pixel coordinates
-v2 get_mouse_pos(); 
+// Returns mouse position in world coordinates
+v2 get_mouse_position();
