@@ -9,7 +9,8 @@ set(MAIN_SOURCES
 
 # Util source files
 set(UTIL_SOURCES 
-    src/util/umath.c)
+    src/util/umath.c
+    src/util/umisc.c)
 
 # Component source files
 set(COMPONENT_SOURCES 
