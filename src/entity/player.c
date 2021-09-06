@@ -1,5 +1,6 @@
 #include "../globals.h"
 #include "../util/umath.h"
+#include "../util/umisc.h"
 
 #include "player.h"
 
@@ -46,9 +47,11 @@ void player_update(Player* this)
 
 void player_draw(Player* this)
 {
-    if (IsKeyDown(KEY_D))
+    v2 mouse_pos = get_mouse_pos();
+
+    if (mouse_pos.x > this->translate.position.x)
         this->flip_y = 1;
-    else if (IsKeyDown(KEY_A))
+    else
         this->flip_y = -1;
 
     sprite_update(&this->sprite, this->translate.position, this->translate.rotation, this->translate.scale, this->flip_y);
