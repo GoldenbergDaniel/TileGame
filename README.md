@@ -1,6 +1,6 @@
 # SpeedrunGame
 
-A platformer game written in C with raylib
+A pixel art game made in C with raylib
 
 ![Screenshot of game (WIP)](screenshot.png)
 
