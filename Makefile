@@ -3,5 +3,5 @@ run:
 compile:
 	cmake --build ./build
 test:
-	cmake --build ./build
-	./build/Speedrun
+	cmake --build ./build_debug
+	./build_debug/Speedrun
