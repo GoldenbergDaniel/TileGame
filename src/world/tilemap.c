@@ -1,10 +1,10 @@
 #include "../globals.h"
 
-#include "grid.h"
+#include "tilemap.h"
 
-Grid grid_load(Image map)
+Tilemap tilemap_load(Image map)
 {
-    Grid grid;
+    Tilemap tilemap;
     Color color;
 
     u16 r;
@@ -13,19 +13,19 @@ Grid grid_load(Image map)
         if (c+1 % GRID_COLS == 0) r++;
 
         color = GetPixelColor(&((u32*) map.data)[(c+1)*(r+1)-1], PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
-
+ 
         if (color.r != 0)
-            grid.tiles[r][c] = TILETYPE_SAND;
+            tilemap.tiles[r][c] = TILETYPE_SAND;
         if (color.g != 0)
-            grid.tiles[r][c] = TILETYPE_GRASS;
+            tilemap.tiles[r][c] = TILETYPE_GRASS;
         if (color.b != 0)
-            grid.tiles[r][c] = TILETYPE_WATER;
+            tilemap.tiles[r][c] = TILETYPE_WATER;
     }
 
-    return grid;
+    return tilemap;
 }
 
-void grid_draw(Grid grid)
+void tilemap_draw(Tilemap tilemap)
 {
     for (u16 r = 0; r < WINDOW_HEIGHT/TILE_SIZE; r++)
     {
@@ -33,11 +33,11 @@ void grid_draw(Grid grid)
         {
             Color color;
 
-            if (grid.tiles[r][c] == TILETYPE_SAND)
+            if (tilemap.tiles[r][c] == TILETYPE_SAND)
                 color = COLOR_SAND;
-            if (grid.tiles[r][c] == TILETYPE_GRASS)
+            if (tilemap.tiles[r][c] == TILETYPE_GRASS)
                 color = COLOR_GRASS;
-            if (grid.tiles[r][c] == TILETYPE_WATER)
+            if (tilemap.tiles[r][c] == TILETYPE_WATER)
                 color = COLOR_WATER;
 
             DrawRectangleV((v2) {c*TILE_SIZE, r*TILE_SIZE}, (v2) {TILE_SIZE, TILE_SIZE}, color);

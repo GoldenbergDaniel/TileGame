@@ -11,10 +11,10 @@ typedef enum TileType
     TILETYPE_SAND,
 } TileType;
 
-typedef struct Grid
+typedef struct Tilemap
 {
     TileType tiles[GRID_ROWS][GRID_COLS];
-} Grid;
+} Tilemap;
 
-Grid grid_load(Image map);
-void grid_draw(Grid grid);
+Tilemap tilemap_load(Image map);
+void tilemap_draw(Tilemap grid);

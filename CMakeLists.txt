@@ -7,6 +7,10 @@ set(CMAKE_C_STANDARD 11)
 set(MAIN_SOURCES 
     src/main.c)
 
+# Entity source files
+set(ENTITY_SOURCES 
+    src/entity/player.c)
+
 # Util source files
 set(UTIL_SOURCES 
     src/util/umath.c
@@ -20,7 +24,7 @@ set(COMPONENT_SOURCES
 
 # Core source files
 set(WORLD_SOURCES 
-    src/world/grid.c)
+    src/world/tilemap.c)
 
 # Entity source files
 set(ENTITY_SOURCES 

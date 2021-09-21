@@ -1,6 +1,6 @@
 #include "globals.h"
 
-#include "world/grid.h"
+#include "world/tilemap.h"
 #include "entity/player.h"
 
 #include "util/umath.h"
@@ -14,7 +14,7 @@ Texture2D water_texture;
 
 Image map;
 
-Grid grid;
+Tilemap tilemap;
 Player player;
 
 f32 window_scale;
@@ -35,7 +35,7 @@ void start()
 {
     SetTextureFilter(target.texture, FILTER_POINT);
 
-    grid = grid_load(map);
+    tilemap = tilemap_load(map);
     player = player_new(player_texture);
 }
 
@@ -50,7 +50,7 @@ void draw()
 {
     ClearBackground(GRAY);
 
-    grid_draw(grid);
+    tilemap_draw(tilemap);
     player_draw(&player);
 }
 
