@@ -1,4 +1,4 @@
-# SpeedrunGame
+# TileGame
 
 A pixel art game made in C with raylib
 
