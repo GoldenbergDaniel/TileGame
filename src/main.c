@@ -1,57 +1,94 @@
 #include "globals.h"
+#include "state.h"
 
 #include "world/tilemap.h"
 #include "entity/player.h"
+#include "util/u_math.h"
+#include "util/u_misc.h"
+#include "util/collision.h"
 
-#include "util/umath.h"
+#include <stdio.h>
 
-RenderTexture2D target;
-
-Texture2D player_texture;
-Texture2D grass_texture;
-Texture2D sand_texture;
-Texture2D water_texture;
-
+State state;
 Image map;
-
-Tilemap tilemap;
-Player player;
-
-f32 window_scale;
 
 void load()
 {
-    target = LoadRenderTexture(WINDOW_WIDTH, WINDOW_HEIGHT);
+    state.target_texture = LoadRenderTexture(WINDOW_WIDTH, WINDOW_HEIGHT);
+    // state.player_texture = LoadTexture("res/texture/player.png");
 
-    player_texture = LoadTexture("resources/texture/player.png");
-    grass_texture = LoadTexture("resources/texture/grass.png");
-    sand_texture = LoadTexture("resources/texture/sand.png");
-    water_texture = LoadTexture("resources/texture/water.png");
-    
-    map = LoadImage("resources/map/map1.png");
+    map = LoadImage("res/map/map.png");
 }
 
 void start()
 {
-    SetTextureFilter(target.texture, FILTER_POINT);
+    SetTextureFilter(state.target_texture.texture, TEXTURE_FILTER_POINT);
 
-    tilemap = tilemap_load(map);
-    player = player_new(player_texture);
+    state.tilemap = tilemap_load(map);
+    state.player = player_new(state.player_texture);
+
+    state.camera = (Camera2D) {0};
+    state.camera.target = (v2) {state.player.translate.position.x + CAM_OFFSET_X, state.player.translate.position.y + CAM_OFFSET_Y};
+    state.camera.offset = (v2) {WINDOW_WIDTH/2, WINDOW_HEIGHT/2};
+    state.camera.rotation = 0.0f;
+    state.camera.zoom = 1.0f;
 }
 
 void update()
 {
-    window_scale = min((f32) GetScreenWidth() / WINDOW_WIDTH, (f32) GetScreenHeight() / WINDOW_HEIGHT);
+    state.window_scale = min((f32) GetScreenWidth()/WINDOW_WIDTH, (f32) GetScreenHeight()/WINDOW_HEIGHT);
 
-    player_update(&player);
+    player_update(&state.player);
+
+    // Collision
+
+    i32 n = 20;
+    v2 new_player_pos = (v2) {
+        (state.player.translate.position.x+(state.player.velocity.x*GetFrameTime()))/n,
+        (state.player.translate.position.y+(state.player.velocity.y*GetFrameTime()))/n
+    };
+
+    if (tilemap_collision_left(state.tilemap, state.player.translate.position, state.player.velocity, n))
+    {
+        new_player_pos.x = (i32) new_player_pos.x+1;
+        state.player.velocity.x = 0;
+    }
+
+    if (tilemap_collision_right(state.tilemap, state.player.translate.position, state.player.velocity, n))
+    {
+        new_player_pos.x = (i32) new_player_pos.x;
+        state.player.velocity.x = 0;
+    }
+
+    if (tilemap_collision_up(state.tilemap, state.player.translate.position, state.player.velocity, n))
+    {
+        new_player_pos.y = (i32) new_player_pos.y+1;
+        state.player.velocity.y = 0;
+    }
+
+    if (tilemap_collision_down(state.tilemap, state.player.translate.position, state.player.velocity, n))
+    {
+        new_player_pos.y = (i32) new_player_pos.y;
+        state.player.velocity.y = 0;
+        state.player.grounded = true;
+    }
+    else
+    {
+        state.player.grounded = false;
+    }
+
+    state.player.translate.position.x = new_player_pos.x*n;
+    state.player.translate.position.y = new_player_pos.y*n;
+
+    state.camera.target = (v2) {state.player.translate.position.x + CAM_OFFSET_X, state.player.translate.position.y + CAM_OFFSET_Y};
 }
 
 void draw()
 {
     ClearBackground(GRAY);
 
-    tilemap_draw(tilemap);
-    player_draw(&player);
+    tilemap_draw(&state.tilemap);
+    player_draw(&state.player);
 }
 
 void draw_renderer()
@@ -59,31 +96,28 @@ void draw_renderer()
     ClearBackground(BLACK);
 
     Rectangle source = {
-        0, 
-        0, 
-        target.texture.width, 
-        -target.texture.height 
+        0.0f,
+        0.0f,
+        state.target_texture.texture.width,
+        -state.target_texture.texture.height
     };
 
     Rectangle destination = {
-        (GetScreenWidth() - ((f32) WINDOW_WIDTH * window_scale)) * 0.5f,
-        (GetScreenHeight() - ((f32) WINDOW_HEIGHT * window_scale)) * 0.5f,
-        WINDOW_WIDTH * window_scale,
-        WINDOW_HEIGHT * window_scale
+        (GetScreenWidth() - ((f32) WINDOW_WIDTH * state.window_scale)) * 0.5f,
+        (GetScreenHeight() - ((f32) WINDOW_HEIGHT * state.window_scale)) * 0.5f,
+        WINDOW_WIDTH * state.window_scale,
+        WINDOW_HEIGHT * state.window_scale
     };
 
-    DrawTexturePro(target.texture, source, destination, (v2) {0, 0}, 0, WHITE);
+    DrawTexturePro(state.target_texture.texture, source, destination, (v2) {0.0f, 0.0f}, .0f, WHITE);
 }
 
 void unload()
 {
-    UnloadTexture(player_texture);
-    UnloadTexture(grass_texture);
-    UnloadTexture(sand_texture);
-    UnloadTexture(water_texture);
+    UnloadTexture(state.player_texture);
 
     UnloadImage(map);
-    UnloadRenderTexture(target);
+    UnloadRenderTexture(state.target_texture);
 }
 
 int main()
@@ -100,12 +134,17 @@ int main()
     {
         update();
 
-        BeginTextureMode(target);
+        BeginTextureMode(state.target_texture);
         draw();
         EndTextureMode();
 
+
         BeginDrawing();
+        BeginMode2D(state.camera);
+
         draw_renderer();
+
+        EndMode2D();
         EndDrawing();
     }
 

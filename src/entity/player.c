@@ -1,21 +1,28 @@
 #include "../globals.h"
 
-#include "../util/umath.h"
-#include "../util/umisc.h"
+#include "../util/u_math.h"
+#include "../util/u_misc.h"
 
 #include "player.h"
 
-Player player_new(Texture2D texture)
+#include "math.h"
+
+Player player_new(Texture texture)
 {
-    Translate translate = translate_new((v2) {39, 49}, 0, 1);
     Sprite sprite = sprite_new(texture, WHITE, 1);
+    Translate translate = translate_new((v2) {300.0f, 100.0f}, 0.0f, 1.0f);
 
     Player player = {
-        translate,
         sprite,
-        (v2) {0, 0},
-        60.0f,
-        1
+        translate,
+        (v2) {0.0f, 0.0f}, // velocity
+        150.0f, // speed
+        2000.0f, // jump height
+        texture.width,
+        texture.height,
+        1, // flip
+        (v2) {-1.0f, 0.0f}, // offset
+        false // grounded
     };
 
     return player;
@@ -23,27 +30,25 @@ Player player_new(Texture2D texture)
 
 void player_update(Player* this)
 {
-    this->velocity = (v2) {0, 0};
-
     if (IsKeyDown(KEY_A))
-        this->velocity.x = -this->speed * GetFrameTime();
+        this->velocity.x = -this->speed;
 
     if (IsKeyDown(KEY_D))
-        this->velocity.x = this->speed * GetFrameTime();
+        this->velocity.x = this->speed;
+
+    if (!IsKeyDown(KEY_A) && !IsKeyDown(KEY_D))
+        this->velocity.x = 0.0f;
 
     if (IsKeyDown(KEY_A) && IsKeyDown(KEY_D))
-        this->velocity.x = 0;
+        this->velocity.x = 0.0f;
 
-    if (IsKeyDown(KEY_W))
-        this->velocity.y = -this->speed * GetFrameTime();
+    if (IsKeyPressed(KEY_W) && this->grounded)
+        this->velocity.y = -sqrtf(2.0f * GRAVITY * this->jump_height);
 
-    if (IsKeyDown(KEY_S))
-        this->velocity.y = this->speed * GetFrameTime();
+    this->translate.position.x += this->velocity.x * GetFrameTime();
+    this->translate.position.y += this->velocity.y * GetFrameTime();
 
-    if (IsKeyDown(KEY_W) && IsKeyDown(KEY_S))
-        this->velocity.y = 0;
-
-    this->translate.position = add_v2(this->translate.position, this->velocity);
+    this->velocity.y += GRAVITY;
 }
 
 void player_draw(Player* this)
@@ -55,7 +60,14 @@ void player_draw(Player* this)
     else
         this->flip_y = -1;
 
-    sprite_update(&this->sprite, this->translate.position, this->translate.rotation, this->translate.scale, this->flip_y);
+    // sprite_update(&this->sprite, this->translate.position, this->translate.rotation, this->translate.scale, this->flip_y, this->offset);
 
-    DrawTexturePro(this->sprite.texture, this->sprite.src, this->sprite.dest, (v2) {0, 0}, this->sprite.rotation, this->sprite.color);
+    // DrawTexturePro(this->sprite.texture, this->sprite.src, this->sprite.dest, (v2) {0.0f, 0.0f}, this->sprite.rotation, this->sprite.color);
+    DrawRectangleV(this->translate.position, (v2) {20.0f, 20.0f}, COLOR_RED);
+}
+
+void player_clamp_to_position(Player* this, v2 position)
+{
+    this->translate.position.x = position.x;
+    this->translate.position.x = position.y;
 }

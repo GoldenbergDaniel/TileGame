@@ -2,6 +2,8 @@
 
 #include "tilemap.h"
 
+#include "stdio.h"
+
 Tilemap tilemap_load(Image map)
 {
     Tilemap tilemap;
@@ -22,10 +24,14 @@ Tilemap tilemap_load(Image map)
             tilemap.tiles[r][c] = TILETYPE_WATER;
     }
 
+    tilemap.size = TILE_SIZE;
+    tilemap.rows = GRID_ROWS;
+    tilemap.cols = GRID_COLS;
+
     return tilemap;
 }
 
-void tilemap_draw(Tilemap tilemap)
+void tilemap_draw(Tilemap* self)
 {
     for (u16 r = 0; r < WINDOW_HEIGHT/TILE_SIZE; r++)
     {
@@ -33,11 +39,11 @@ void tilemap_draw(Tilemap tilemap)
         {
             Color color;
 
-            if (tilemap.tiles[r][c] == TILETYPE_SAND)
+            if (self->tiles[r][c] == TILETYPE_SAND)
                 color = COLOR_SAND;
-            if (tilemap.tiles[r][c] == TILETYPE_GRASS)
+            if (self->tiles[r][c] == TILETYPE_GRASS)
                 color = COLOR_GRASS;
-            if (tilemap.tiles[r][c] == TILETYPE_WATER)
+            if (self->tiles[r][c] == TILETYPE_WATER)
                 color = COLOR_WATER;
 
             DrawRectangleV((v2) {c*TILE_SIZE, r*TILE_SIZE}, (v2) {TILE_SIZE, TILE_SIZE}, color);

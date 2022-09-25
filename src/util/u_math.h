@@ -15,5 +15,8 @@ v2 add_v2(v2 vec1, v2 vec2);
 // Subtracts two vectors
 v2 sub_v2(v2 vec1, v2 vec2);
 
+// Check if ranges interect
+bool range_intersect(f32 min1, f32 max1, f32 min2, f32 max2);
+
 // Multiplies two vectors (dot product)
 // f32 mult_v2(v2 vec1, v2 vec2);

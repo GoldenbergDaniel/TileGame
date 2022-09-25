@@ -1,7 +1,7 @@
 run:
-	./build/Speedrun
+	./build/TileGame
 compile:
 	cmake --build ./build
 test:
-	cmake --build ./build_debug
-	./build_debug/Speedrun
+	cmake --build ./build
+	./build/TileGame

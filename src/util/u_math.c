@@ -1,6 +1,6 @@
 #include "../globals.h"
 
-#include "umath.h"
+#include "u_math.h"
 #include "math.h"
 
 f32 min(f32 num1, f32 num2) 
@@ -36,6 +36,11 @@ v2 sub_v2(v2 vec1, v2 vec2)
     vec3.y = vec1.y - vec2.y;
 
     return vec3;
+}
+
+bool range_intersect(f32 min1, f32 max1, f32 min2, f32 max2)
+{
+    return max1 >= min2 && min1 <= max2;
 }
 
 // f32 mult_v2(v2 vec1, v2 vec2)

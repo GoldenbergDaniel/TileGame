@@ -12,4 +12,4 @@ typedef struct Sprite
 } Sprite;
 
 Sprite sprite_new(Texture2D texture, Color color, i8 flip_y);
-void sprite_update(Sprite* this, v2 pos, f32 rot, f32 scale, i8 flip_y);
+void sprite_update(Sprite* this, v2 pos, f32 rot, f32 scale, i8 flip_y, v2 offset);

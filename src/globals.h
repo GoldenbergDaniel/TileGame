@@ -2,13 +2,15 @@
 
 #include "raylib.h"
 
-#define WINDOW_TITLE "Speedrun"
+#define WINDOW_TITLE "GAME"
 #define TARGET_FPS 60
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
 
-#define VIEWPORT_SCALE 8
+#define VIEWPORT_SCALE 4
+#define CAM_OFFSET_X 0
+#define CAM_OFFSET_Y -50
 
 #define COLOR_BLACK (Color) {19, 19, 19, 255}
 #define COLOR_WHITE (Color) {236, 236, 236, 255}
@@ -20,6 +22,8 @@
 #define COLOR_GRASS (Color) {119, 141, 48, 255}
 #define COLOR_DIRT (Color) {67, 57, 42, 255}
 #define COLOR_SAND (Color) {198, 183, 133, 255}
+
+#define GRAVITY (9.81*3)
 
 #define NIL 0
 

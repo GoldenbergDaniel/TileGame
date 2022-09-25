@@ -5,15 +5,15 @@
 Sprite sprite_new(Texture2D texture, Color color, i8 flip_y)
 {
     Rectangle src = {
-        0, 
-        0,
+        0.0f, 
+        0.0f,
         texture.width * flip_y,
         texture.height 
     };
 
     Rectangle dest = {
-        0 * VIEWPORT_SCALE,
-        (0 - texture.height) * VIEWPORT_SCALE,
+        0,
+        -texture.height * VIEWPORT_SCALE,
         texture.width * VIEWPORT_SCALE,
         texture.height * VIEWPORT_SCALE
     };
@@ -23,7 +23,7 @@ Sprite sprite_new(Texture2D texture, Color color, i8 flip_y)
         color,
         src,
         dest,
-        (v2) {0, 0},
+        (v2) {0.0f, 0.0f},
         0,
         1
     };
@@ -31,12 +31,12 @@ Sprite sprite_new(Texture2D texture, Color color, i8 flip_y)
     return sprite;
 }
 
-void sprite_update(Sprite* this, v2 pos, f32 rot, f32 scale, i8 flip_y)
+void sprite_update(Sprite* this, v2 pos, f32 rot, f32 scale, i8 flip_y, v2 offset)
 {
     Rectangle src = {
-        0, 
-        0,
-        this->texture.width * flip_y,
+        0.0f, 
+        0.0f,
+        (this->texture.width + offset.x) * flip_y,
         this->texture.height 
     };
 

@@ -10,9 +10,9 @@ Note: Very work in progress
 
 ```bash
 cd SpeedrunGame
-mkdir build  # Creates build folder
-make compile  # Compiles project
-make run  # Runs executable
+mkdir build  # Create build folder
+make compile  # Compile project
+make run  # Run executable
 ```
 
 Make sure `cmake` is installed

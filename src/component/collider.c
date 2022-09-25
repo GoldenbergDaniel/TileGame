@@ -1,6 +1,6 @@
 #include "../globals.h"
 
-#include "../util/umath.h"
+#include "../util/u_math.h"
 #include "collider.h"
 
 BoxCollider box_collider_new(v2 offset, f32 width, f32 height, bool is_trigger)
