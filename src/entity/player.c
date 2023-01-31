@@ -6,6 +6,7 @@
 #include "player.h"
 
 #include "math.h"
+#include "stdio.h"
 
 Player player_new(Texture texture)
 {
@@ -22,7 +23,8 @@ Player player_new(Texture texture)
         texture.height,
         1, // flip
         (v2) {-1.0f, 0.0f}, // offset
-        false // grounded
+        false, // grounded
+        false // colliding_right
     };
 
     return player;
@@ -33,41 +35,35 @@ void player_update(Player* this)
     if (IsKeyDown(KEY_A))
         this->velocity.x = -this->speed;
 
-    if (IsKeyDown(KEY_D))
+    if (IsKeyDown(KEY_D) && !this->colliding_right)
         this->velocity.x = this->speed;
 
-    if (!IsKeyDown(KEY_A) && !IsKeyDown(KEY_D))
+    if ((IsKeyDown(KEY_A) && IsKeyDown(KEY_D)) || (!IsKeyDown(KEY_A) && !IsKeyDown(KEY_D)))
         this->velocity.x = 0.0f;
 
-    if (IsKeyDown(KEY_A) && IsKeyDown(KEY_D))
-        this->velocity.x = 0.0f;
-
-    if (IsKeyPressed(KEY_W) && this->grounded)
+    if (IsKeyDown(KEY_W) && this->grounded)
+    {
         this->velocity.y = -sqrtf(2.0f * GRAVITY * this->jump_height);
+        printf("Jumped! \n");
+    }
+
+    this->velocity.y += GRAVITY;
 
     this->translate.position.x += this->velocity.x * GetFrameTime();
     this->translate.position.y += this->velocity.y * GetFrameTime();
-
-    this->velocity.y += GRAVITY;
 }
 
 void player_draw(Player* this)
 {
-    v2 mouse_pos = get_mouse_position();
+    // v2 mouse_pos = get_mouse_position();
 
-    if (mouse_pos.x > this->translate.position.x)
-        this->flip_y = 1;
-    else
-        this->flip_y = -1;
+    // if (mouse_pos.x > this->translate.position.x)
+    //     this->flip_y = 1;
+    // else
+    //     this->flip_y = -1;
 
     // sprite_update(&this->sprite, this->translate.position, this->translate.rotation, this->translate.scale, this->flip_y, this->offset);
 
     // DrawTexturePro(this->sprite.texture, this->sprite.src, this->sprite.dest, (v2) {0.0f, 0.0f}, this->sprite.rotation, this->sprite.color);
     DrawRectangleV(this->translate.position, (v2) {20.0f, 20.0f}, COLOR_RED);
-}
-
-void player_clamp_to_position(Player* this, v2 position)
-{
-    this->translate.position.x = position.x;
-    this->translate.position.x = position.y;
 }

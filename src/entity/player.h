@@ -15,9 +15,9 @@ typedef struct Player
     i8 flip_y;
     v2 offset;
     bool grounded;
+    bool colliding_right;
 } Player;
 
 Player player_new();
 void player_update(Player* this);
 void player_draw(Player* this);
-void player_clamp_to_position(Player* this, v2 position);

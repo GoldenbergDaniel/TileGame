@@ -58,6 +58,12 @@ void update()
     {
         new_player_pos.x = (i32) new_player_pos.x;
         state.player.velocity.x = 0;
+        state.player.colliding_right = true;
+        printf("Colliding right! \n");
+    }
+    else
+    {
+        state.player.colliding_right = false;
     }
 
     if (tilemap_collision_up(state.tilemap, state.player.translate.position, state.player.velocity, n))
@@ -79,6 +85,8 @@ void update()
 
     state.player.translate.position.x = new_player_pos.x*n;
     state.player.translate.position.y = new_player_pos.y*n;
+
+    // Camera follows target
 
     state.camera.target = (v2) {state.player.translate.position.x + CAM_OFFSET_X, state.player.translate.position.y + CAM_OFFSET_Y};
 }
@@ -114,8 +122,6 @@ void draw_renderer()
 
 void unload()
 {
-    UnloadTexture(state.player_texture);
-
     UnloadImage(map);
     UnloadRenderTexture(state.target_texture);
 }
