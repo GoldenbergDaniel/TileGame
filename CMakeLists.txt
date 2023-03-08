@@ -32,7 +32,15 @@ set(COMPONENT_SOURCES
 set(WORLD_SOURCES 
     src/world/tilemap.c)
 
+
+# find_package(raylib 4.0.0 REQUIRED)
+include_directories(${CMAKE_SOURCE_DIR}/deps/raylib/include)
+# link_directories(${PROJECT_NAME} lib/raylib/lib)
+
 add_executable(${PROJECT_NAME} ${MAIN_SOURCES} ${UTIL_SOURCES} ${COMPONENT_SOURCES} ${WORLD_SOURCES} ${ENTITY_SOURCES})
 
-find_package(raylib 4.0.0 REQUIRED)
-target_link_libraries(${PROJECT_NAME} raylib)
+file(GLOB LIBRARIES deps/raylib/lib/libraylib.dylib)
+# set(LIBRARIES 
+#     deps/raylib/lib/libraylib.dylib)
+
+target_link_libraries(${PROJECT_NAME} ${LIBRARIES})
