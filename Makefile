@@ -1,7 +1,7 @@
-run:
-	./build/TileGame
+all:
+	cc src/*.c src/entity/*.c src/util/*.c src/component/*.c src/world/*.c -o build/Game -lraylib
+	./build/Game
 compile:
-	cmake --build ./build
-test:
-	cmake --build ./build
-	./build/TileGame
+	cc src/*.c src/entity/*.c src/util/*.c src/component/*.c src/world/*.c -o build/Game -lraylib
+run:
+	./build/Game

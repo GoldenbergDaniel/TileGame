@@ -5,7 +5,7 @@
 #include "entity/player.h"
 #include "util/u_math.h"
 #include "util/u_misc.h"
-#include "util/collision.h"
+#include "util/u_collision.h"
 
 #include <stdio.h>
 
@@ -15,7 +15,6 @@ Image map;
 void load()
 {
     state.target_texture = LoadRenderTexture(WINDOW_WIDTH, WINDOW_HEIGHT);
-    // state.player_texture = LoadTexture("res/texture/player.png");
 
     map = LoadImage("res/map/map.png");
 }
@@ -28,8 +27,8 @@ void start()
     state.player = player_new(state.player_texture);
 
     state.camera = (Camera2D) {0};
-    state.camera.target = (v2) {state.player.translate.position.x + CAM_OFFSET_X, state.player.translate.position.y + CAM_OFFSET_Y};
-    state.camera.offset = (v2) {WINDOW_WIDTH/2, WINDOW_HEIGHT/2};
+    // state.camera.target = (v2) {state.player.translate.position.x + CAM_OFFSET_X, state.player.translate.position.y + CAM_OFFSET_Y};
+    state.camera.offset = (v2) {0, 0};
     state.camera.rotation = 0.0f;
     state.camera.zoom = 1.0f;
 }
@@ -43,36 +42,35 @@ void update()
     // Collision
 
     i32 n = 20;
-    v2 new_player_pos = (v2) {
-        (state.player.translate.position.x+(state.player.velocity.x*GetFrameTime()))/n,
-        (state.player.translate.position.y+(state.player.velocity.y*GetFrameTime()))/n
+    v2 new_player_pos = (v2) 
+    {
+        (state.player.translate.position.x+state.player.velocity.x*GetFrameTime())/n,
+        (state.player.translate.position.y+state.player.velocity.y*GetFrameTime())/n
     };
 
-    if (tilemap_collision_left(state.tilemap, state.player.translate.position, state.player.velocity, n))
+    if (tilemap_collision_left(state.tilemap, new_player_pos, state.player.translate.position.y/n, state.player.velocity.x*GetFrameTime()))
     {
         new_player_pos.x = (i32) new_player_pos.x+1;
         state.player.velocity.x = 0;
     }
 
-    if (tilemap_collision_right(state.tilemap, state.player.translate.position, state.player.velocity, n))
+    if (tilemap_collision_right(state.tilemap, new_player_pos, state.player.translate.position.y/n, state.player.velocity.x*GetFrameTime()))
     {
         new_player_pos.x = (i32) new_player_pos.x;
         state.player.velocity.x = 0;
-        state.player.colliding_right = true;
-        printf("Colliding right! \n");
     }
     else
     {
         state.player.colliding_right = false;
     }
 
-    if (tilemap_collision_up(state.tilemap, state.player.translate.position, state.player.velocity, n))
+    if (tilemap_collision_up(state.tilemap, new_player_pos, state.player.velocity.y*GetFrameTime()))
     {
         new_player_pos.y = (i32) new_player_pos.y+1;
         state.player.velocity.y = 0;
     }
 
-    if (tilemap_collision_down(state.tilemap, state.player.translate.position, state.player.velocity, n))
+    if (tilemap_collision_down(state.tilemap, new_player_pos, state.player.velocity.y*GetFrameTime()))
     {
         new_player_pos.y = (i32) new_player_pos.y;
         state.player.velocity.y = 0;
@@ -88,7 +86,8 @@ void update()
 
     // Camera follows target
 
-    state.camera.target = (v2) {state.player.translate.position.x + CAM_OFFSET_X, state.player.translate.position.y + CAM_OFFSET_Y};
+    // state.camera.target = (v2) {state.player.translate.position.x + CAM_OFFSET_X, state.player.translate.position.y + CAM_OFFSET_Y};
+    // state.camera.offset = (v2) {300, 50};
 }
 
 void draw()
@@ -126,7 +125,7 @@ void unload()
     UnloadRenderTexture(state.target_texture);
 }
 
-int main()
+i32 main()
 {
     SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI | FLAG_WINDOW_RESIZABLE);
     SetTargetFPS(TARGET_FPS);
@@ -143,7 +142,6 @@ int main()
         BeginTextureMode(state.target_texture);
         draw();
         EndTextureMode();
-
 
         BeginDrawing();
         BeginMode2D(state.camera);

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../component/sprite.h"
-#include "../component/translate.h"
+#include "../component/c_sprite.h"
+#include "../component/c_translate.h"
 
 typedef struct Player
 {

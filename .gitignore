@@ -1,5 +1,5 @@
-/build
-/build_debug
-/cmake-build-debug
-/.vscode
+build/
+build_debug/
+cmake-build-debug/
+.vscode/
 *.DS_Store

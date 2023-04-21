@@ -23,9 +23,8 @@
 #define COLOR_DIRT (Color) {67, 57, 42, 255}
 #define COLOR_SAND (Color) {198, 183, 133, 255}
 
-#define GRAVITY (9.81*3)
-
-#define NIL 0
+#define GRAVITY (27.0f)
+#define NULL 0
 
 typedef unsigned char u8;
 typedef short unsigned int u16;
