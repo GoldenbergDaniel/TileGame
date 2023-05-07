@@ -50,6 +50,8 @@ void update()
 
     if (tilemap_collision_left(state.tilemap, new_player_pos, state.player.translate.position.y/n, state.player.velocity.x*GetFrameTime()))
     {
+        printf("Collision!\n");
+
         new_player_pos.x = (i32) new_player_pos.x+1;
         state.player.velocity.x = 0;
     }

@@ -42,10 +42,7 @@ void player_update(Player* this)
         this->velocity.x = 0.0f;
 
     if (IsKeyDown(KEY_W) && this->grounded)
-    {
         this->velocity.y = -sqrtf(2.0f * GRAVITY * this->jump_height);
-        printf("Jumped! \n");
-    }
 
     this->velocity.y += GRAVITY;
 

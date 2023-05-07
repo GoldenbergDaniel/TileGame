@@ -12,7 +12,7 @@ bool tilemap_collision_left(Tilemap tilemap, v2 object_pos, f32 y, f32 object_ve
         if (object_vel <= 0)
         {
             if (tilemap.tiles[(i32) (y)][(i32) object_pos.x] != 0 
-                || tilemap.tiles[(i32) (y+0.9f)][(i32) object_pos.x] != 0)
+                || tilemap.tiles[(i32) (y+0.0f)][(i32) object_pos.x] != 0)
             {
                 return true;
             }

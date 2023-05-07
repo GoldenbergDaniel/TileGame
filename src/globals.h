@@ -23,19 +23,21 @@
 #define COLOR_DIRT (Color) {67, 57, 42, 255}
 #define COLOR_SAND (Color) {198, 183, 133, 255}
 
-#define GRAVITY (27.0f)
-#define NULL 0
+#define GRAVITY (19.6f)
+
+#define PRINT_INT(val, msg) printf("%s %i \n", msg, val)
+#define PRINT_FLOAT(val, msg) printf("%s %f \n", msg, val)
 
 typedef unsigned char u8;
-typedef short unsigned int u16;
+typedef unsigned short u16;
 typedef unsigned int u32;
-typedef long unsigned int u64;
+typedef unsigned long u64;
 typedef char i8;
-typedef short int i16;
+typedef short i16;
 typedef int i32;
-typedef long int i64;
+typedef long i64;
 typedef float f32;
-typedef long f64;
+typedef double f64;
 typedef Vector2 v2;
 typedef Vector3 v3;
 typedef Vector4 v4;
